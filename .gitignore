@@ -1,0 +1,53 @@
+# ==========================================
+# CONFIGURAÇÃO COMPLETA - REVISAR DEPOIS
+# ==========================================
+
+# Virtual environment
+.venv/
+
+# Projeto a ignorar completamente
+projetos/projeto-1/
+
+# Exercícios níveis 3, 4, 5 (apenas README - ignorar pastas completas)
+exercicios/nivel-3/
+exercicios/nivel-4/
+exercicios/nivel-5/
+
+# Python - Cache e arquivos compilados
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Bancos de dados SQLite
+*.db
+*.sqlite3
+*.sqlite
+
+# IDE - PyCharm/IntelliJ
+.idea/
+
+# Testes e coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Empacotamento
+*.egg-info/
+dist/
+build/
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Variáveis de ambiente (se houver)
+.env
+.env.local
+.env.*.local
+
+# ==========================================
+# FIM DA CONFIGURAÇÃO - REVISAR DEPOIS
+# ==========================================
