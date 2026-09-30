@@ -8,7 +8,7 @@ rota_livros = APIRouter(prefix="/livros", tags=["livros"])
 
 
 @rota_livros.post("/", status_code=status.HTTP_201_CREATED)
-def adicionar_livro(titulo: str, ano_publicado: str, autor_id: int):
+def adicionar_livro(titulo: str, ano_publicacao: str, autor_id: int):
     session = Session()
 
     if not titulo.strip():
@@ -16,7 +16,7 @@ def adicionar_livro(titulo: str, ano_publicado: str, autor_id: int):
         raise HTTPException(status_code=400, detail="titulo é obrigatorio")
 
     try:
-        data = datetime.strptime(ano_publicado, "%d/%m/%Y")
+        data = datetime.strptime(ano_publicacao, "%d/%m/%Y")
         if data > datetime.now():
             session.close()
             raise HTTPException(status_code=400, detail="ano de publicacao nao pode ser no futuro")
@@ -37,7 +37,7 @@ def adicionar_livro(titulo: str, ano_publicado: str, autor_id: int):
         )
 
     try:
-        livro = Livro(titulo=titulo, ano_publicacao=ano_publicado, autor_id=autor.id)
+        livro = Livro(titulo=titulo, ano_publicacao=ano_publicacao, autor_id=autor.id)
 
         session.add(livro)
         session.commit()
@@ -79,30 +79,38 @@ def atualizar_livro(id):
 def listar_livros():
     session = Session()
     try:
-
         livros = session.query(Livro).all()
 
-        if livros is None:
-            raise HTTPException(status_code=404, detail="livros nao encontrado")
-
-        return livros
-
+        return [
+            {
+                "id": l.id,
+                "titulo": l.titulo,
+                "ano_publicacao": l.ano_publicacao,
+                "disponivel": l.disponivel,
+                "autor_id": l.autor_id
+            }
+            for l in livros
+        ]
     finally:
         session.close()
 
 
 @rota_livros.get("/{id}")
 def listar_livro(id: int):
-   session = Session()
+    session = Session()
 
-   try:
-       livro = session.get(Livro, id)
+    try:
+        livro = session.get(Livro, id)
 
-       if livro is None:
+        if livro is None:
+            raise HTTPException(status_code=404, detail="livro nao encontrado")
 
-           raise HTTPException(status_code=404, detail="livro nao encontrado")
-
-       return livro
-
-   finally:
-       session.close()
+        return {
+            "id": livro.id,
+            "titulo": livro.titulo,
+            "ano_publicacao": livro.ano_publicacao,
+            "disponivel": livro.disponivel,
+            "autor_id": livro.autor_id
+        }
+    finally:
+        session.close()
