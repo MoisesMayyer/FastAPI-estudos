@@ -54,8 +54,20 @@ def adicionar_livro(titulo: str, ano_publicado: str, autor_id: int):
 
 
 @rota_livros.delete("/{id}")
-def deletar_livro(id):
-    pass
+def deletar_livro(id: int):
+    session = Session()
+
+    try:
+        livro = session.get(Livro, id)
+
+        if livro is None:
+            raise HTTPException(status_code=404, detail="livro nao encontrado")
+
+        session.delete(livro)
+        session.commit()
+        return {"id": livro.id, "titulo": livro.titulo}
+    finally:
+        session.close()
 
 
 @rota_livros.put("/{id}")
@@ -65,9 +77,32 @@ def atualizar_livro(id):
 
 @rota_livros.get("/")
 def listar_livros():
-    pass
+    session = Session()
+    try:
+
+        livros = session.query(Livro).all()
+
+        if livros is None:
+            raise HTTPException(status_code=404, detail="livros nao encontrado")
+
+        return livros
+
+    finally:
+        session.close()
 
 
 @rota_livros.get("/{id}")
-def listar_livro(id):
-    pass
+def listar_livro(id: int):
+   session = Session()
+
+   try:
+       livro = session.get(Livro, id)
+
+       if livro is None:
+
+           raise HTTPException(status_code=404, detail="livro nao encontrado")
+
+       return livro
+
+   finally:
+       session.close()
