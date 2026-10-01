@@ -5,22 +5,21 @@ from models import Usuario, Tarefa
 from depends import get_db
 from security import pwd_context
 
-rota_usuario = APIRouter(prefix="/usuarios" , tags=["usuarios"])
+rota_usuario = APIRouter(prefix="/usuarios", tags=["usuarios"])
 
 
 @rota_usuario.post("/", response_model=UsuarioResponse, status_code=status.HTTP_201_CREATED)
 def adicionar_usuario(usuario_dados: UsuarioCreate, db: Session = Depends(get_db)):
-
     usuario_existente = db.query(Usuario).filter(Usuario.email == usuario_dados.email).first()
 
     if usuario_existente:
-        raise HTTPException(status_code=400, detail="Usuario ja existe")
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Usuário já existe")
 
     if not usuario_dados.nome.strip():
-        raise HTTPException(status_code=400, detail="nome não pode ser vazio")
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Nome não pode ser vazio")
 
     if not usuario_dados.senha or not usuario_dados.senha.strip():
-        raise HTTPException(400, "senha não pode ser vazia")
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Senha não pode ser vazia")
 
     senha_criptografada = pwd_context.hash(usuario_dados.senha)
     usuario = Usuario(nome=usuario_dados.nome, email=usuario_dados.email, senha=senha_criptografada)
@@ -37,12 +36,12 @@ def deletar_usuario(id: int, db: Session = Depends(get_db)):
     usuario_existe = db.query(Usuario).filter(Usuario.id == id).first()
 
     if not usuario_existe:
-        raise HTTPException(status_code=404, detail="usuario inexistente")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Usuário não encontrado")
 
     usuario_tarefa = db.query(Tarefa).filter(Tarefa.usuario_id == id).first()
 
     if usuario_tarefa:
-        raise HTTPException(status_code=400, detail="Usuario possui tarefa vinculada")
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Usuário possui tarefas vinculadas")
 
     db.delete(usuario_existe)
     db.commit()
@@ -54,26 +53,26 @@ def atualizar_usuario(id: int, dados: UsuarioUpdate, db: Session = Depends(get_d
     usuario = db.get(Usuario, id)
 
     if not usuario:
-        raise HTTPException(status_code=404, detail="Usuário não encontrado")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Usuário não encontrado")
 
     if dados.nome is not None:
         if not dados.nome.strip():
-            raise HTTPException(400, "nome não pode ser vazio")
+            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Nome não pode ser vazio")
         usuario.nome = dados.nome.strip()
-    
+
     if dados.email is not None:
         if not dados.email.strip():
-            raise HTTPException(400, "email não pode ser vazio")
+            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Email não pode ser vazio")
 
         email_existe = db.query(Usuario).filter(Usuario.email == dados.email, Usuario.id != id).first()
 
         if email_existe:
-            raise HTTPException(400, "email já cadastrado")
+            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Email já cadastrado")
         usuario.email = dados.email.strip()
-    
+
     if dados.senha is not None:
         if not dados.senha.strip():
-            raise HTTPException(400, "senha não pode ser vazia")
+            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Senha não pode ser vazia")
 
         usuario.senha = pwd_context.hash(dados.senha.strip())
 
@@ -94,6 +93,6 @@ def retornar_usuario(id: int, db: Session = Depends(get_db)):
     usuario = db.get(Usuario, id)
 
     if not usuario:
-        raise HTTPException(status_code=404, detail="usuario inexistente")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Usuário não encontrado")
 
     return usuario
