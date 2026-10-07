@@ -19,7 +19,7 @@ def cadastrar_aluno(dados: AlunoCreate, db: Session = Depends(get_db)):
     if aluno_existe:
         raise HTTPException(status_code=409, detail="aluno ja cadastrado")
 
-    if not dados.email.strip():
+    if not dados.email.strip().lower():
         raise HTTPException(status_code=400, detail="o campo email nao deve ser vazio")
 
     senha_hash = pwd_context.hash(dados.senha)
