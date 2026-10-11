@@ -37,8 +37,8 @@ Novas tecnologias serão adicionadas conforme avançar nos estudos.
 Clone o repositório e acesse a pasta do projeto:
 
 ```bash
-git clone <https://github.com/MoisesMayyer/FastAPI-estudos>
-cd <FastAPI-estudos>
+git clone https://github.com/MoisesMayyer/FastAPI-estudos
+cd FastAPI-estudos
 ```
 
 Crie e ative um ambiente virtual:

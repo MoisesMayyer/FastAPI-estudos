@@ -1,4 +1,4 @@
-# EX007 — API de Produtos com Autenticação e OAuth2
+# EX003 — API de Produtos com Autenticação e OAuth2
 
 **Dificuldade:** Intermediário
 
