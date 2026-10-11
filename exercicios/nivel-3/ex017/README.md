@@ -1,4 +1,4 @@
-# EX002 — API de Tarefas com JWT
+# EX017 — API de Tarefas com JWT
 
 **Dificuldade:** Intermediário
 

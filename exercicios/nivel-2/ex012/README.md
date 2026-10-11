@@ -1,4 +1,4 @@
-# EX001 — Cadastro de produtos
+# EX012 — Cadastro de produtos
 
 **Dificuldade:** Fácil
 
