@@ -9,4 +9,4 @@ class Usuario(Base):
     nome = Column("Nome",String, index=True)
     email = Column("Email",String, unique=True, index=True)
     senha = Column("Senha",String)
-    ativo = Column("Ativo",Boolean, default=True)
+    ativo = Column("Ativo",Boolean, default=True, nullable=False)
