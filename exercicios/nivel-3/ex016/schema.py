@@ -42,3 +42,16 @@ class UsuarioResponse(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+class AuthLogin(BaseModel):
+    email: EmailStr = Field(..., description="Email do usuário (obrigatório)")
+    senha: str = Field(..., min_length=8, description="Senha do usuário (obrigatório)")
+
+    @field_validator("senha")
+    @classmethod
+    def validar_senha(cls, valor: str) -> str:
+        if not valor.strip():
+            raise ValueError("A senha não pode conter apenas espaços")
+
+        return valor
