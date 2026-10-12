@@ -56,6 +56,32 @@ class Login(BaseModel):
         return valor
 
 
+class TarefaBase(BaseModel):
+    titulo: str = Field(..., min_length=3, description="Título da tarefa (obrigatório)")
+    descricao: str = Field(..., min_length=3, description="Descrição da tarefa (obrigatória)")
+
+
+class TarefaCreate(TarefaBase):
+    pass  # herda titulo e descricao obrigatórios; usuario_id vem do usuário autenticado
+
+
+class TarefaUpdate(TarefaBase):
+    titulo: Optional[str] = Field(None, min_length=3, description="Título da tarefa (opcional)")
+    descricao: Optional[str] = Field(None, min_length=3, description="Descrição da tarefa (opcional)")
+    concluida: Optional[bool] = Field(None, description="Status da tarefa (opcional)")
+
+
+class TarefaResponse(BaseModel):
+    id: int
+    titulo: str
+    descricao: str
+    usuario_id: int
+    concluida: bool
+
+    class Config:
+        from_attributes = True
+
+
 class Token(BaseModel):
     access_token: str
     token_type: str = "bearer"
