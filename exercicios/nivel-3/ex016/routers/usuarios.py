@@ -4,7 +4,7 @@ from schema import UsuarioCreate, UsuarioResponse, UsuarioUpdate
 
 from depends import get_db
 
-from models import Usuario
+from model import Usuario
 
 from sqlalchemy.orm import Session
 

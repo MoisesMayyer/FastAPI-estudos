@@ -1,6 +1,6 @@
 from fastapi import APIRouter,Depends, HTTPException
 
-from models import Usuario
+from model import Usuario
 from schema import AuthLogin
 
 from depends import get_db
