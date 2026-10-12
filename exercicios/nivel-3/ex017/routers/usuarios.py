@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, Depends, status
 from sqlalchemy.orm import Session
 from models import Usuario
-from depends import get_db
+from dependencies import get_db
 from security import pwd_context
 from schemas import UsuarioCreate, UsuarioResponse, UsuarioUpdate
 
