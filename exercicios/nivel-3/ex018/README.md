@@ -38,7 +38,7 @@ Introduzir os seguintes conceitos:
 
 ### Usuario
 
-Utilize o modelo de usuário desenvolvido no EX001, mantendo o armazenamento seguro das senhas.
+Utilize o modelo de usuário desenvolvido no EX016, mantendo o armazenamento seguro das senhas.
 
 ## Endpoints
 
