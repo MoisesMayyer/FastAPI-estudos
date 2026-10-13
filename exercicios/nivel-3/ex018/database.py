@@ -6,4 +6,4 @@ db = create_engine('sqlite:///database.db')
 
 Base = declarative_base()
 
-Session = sessionmaker(bind=db)
+SessionLocal = sessionmaker(bind=db)
