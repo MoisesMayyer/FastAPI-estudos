@@ -1,5 +1,6 @@
-from pydantic import BaseModel, EmailStr, Field, field_validator
+from pydantic import BaseModel, EmailStr, Field, field_validator, ConfigDict
 from typing import Optional
+
 
 class UsuarioBase(BaseModel):
     nome: str = Field(..., min_length=3, description="Nome do usuário (obrigatório, mínimo 3 caracteres)")
@@ -34,10 +35,14 @@ class UsuarioUpdate(BaseModel):
 
 
 class UsuarioResponse(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
     id: int
     nome: str
     email: EmailStr
     ativo: bool
 
-    class Config:
-        from_attributes = True
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str = "bearer"
