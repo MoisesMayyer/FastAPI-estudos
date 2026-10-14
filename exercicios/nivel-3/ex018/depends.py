@@ -37,5 +37,8 @@ def verificar_token(token: str = Depends(oauth2_scheme), session: Session = Depe
 
     if not usuario:
         raise HTTPException(status_code=401, detail="Acesso negado")
-    else:
-        return usuario
+    
+    if not usuario.ativo:
+        raise HTTPException(status_code=401, detail="Acesso negado")
+        
+    return usuario
