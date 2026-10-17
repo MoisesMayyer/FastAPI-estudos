@@ -12,7 +12,9 @@ class Usuario(Base):
     senha = Column("Senha",String)
     ativo = Column("Ativo",Boolean, default=True, nullable=False)
 
-    projetos = relationship("Projeto", back_populates="usuario")
+    projetos = relationship(
+        "Projeto", back_populates="usuario", cascade="all, delete-orphan"
+    )
 
 
 class Projeto(Base):
@@ -24,7 +26,9 @@ class Projeto(Base):
     usuario_id = Column("Usuario_id",Integer, ForeignKey('usuarios.id'))
 
     usuario = relationship("Usuario", back_populates="projetos")
-    tarefas = relationship("Tarefa", back_populates="projeto")
+    tarefas = relationship(
+        "Tarefa", back_populates="projeto", cascade="all, delete-orphan"
+    )
 
 
 class Tarefa(Base):

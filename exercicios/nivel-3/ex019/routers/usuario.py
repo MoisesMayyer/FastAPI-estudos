@@ -26,15 +26,18 @@ async def criar_usuario(usuario: UsuarioCreate, db: Session = Depends(get_db)):
     return novo_usuario
 
 
-
 @user_router.delete("/{id}", status_code=status.HTTP_204_NO_CONTENT)
 async def deletar_usuario(id: int, db: Session = Depends(get_db)):
     usuario = db.query(Usuario).filter(Usuario.id == id).first()
     if not usuario:
         raise HTTPException(status_code=404, detail="Usuário não encontrado")
 
-    db.delete(usuario)
-    db.commit()
+    try:
+        db.delete(usuario)
+        db.commit()
+    except Exception:
+        db.rollback()
+        raise
 
 
 @user_router.put("/{id}", response_model=UsuarioResponse)
