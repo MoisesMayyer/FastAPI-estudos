@@ -6,7 +6,7 @@ from database import Base
 class Usuario(Base):
     __tablename__ = 'usuarios'
 
-    id = Column("Id",Integer, primary_key=True, index=True, autoincrement=True)
+    id = Column("id",Integer, primary_key=True, index=True, autoincrement=True)
     nome = Column("Nome",String, index=True)
     email = Column("Email",String, unique=True, index=True)
     senha = Column("Senha",String)
@@ -18,10 +18,10 @@ class Usuario(Base):
 class Projeto(Base):
     __tablename__ = 'projetos'
 
-    id = Column("Id",Integer, primary_key=True, index=True, autoincrement=True)
+    id = Column("id",Integer, primary_key=True, index=True, autoincrement=True)
     nome = Column("Nome",String, index=True)
     descricao = Column("Descricao", String)
-    usuario_id = Column("Usuario",Integer, ForeignKey('usuarios.id'))
+    usuario_id = Column("Usuario_id",Integer, ForeignKey('usuarios.id'))
 
     usuario = relationship("Usuario", back_populates="projetos")
     tarefas = relationship("Tarefa", back_populates="projeto")
@@ -30,7 +30,7 @@ class Projeto(Base):
 class Tarefa(Base):
     __tablename__ = 'tarefas'
 
-    id = Column("Id",Integer, primary_key=True, index=True, autoincrement=True)
+    id = Column("id",Integer, primary_key=True, index=True, autoincrement=True)
     titulo = Column("Titulo",String, index=True)
     descricao = Column("Descricao", String)
     concluida = Column("Concluida",Boolean, default=False, nullable=False)
