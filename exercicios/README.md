@@ -11,7 +11,7 @@ Cada nível introduz novos conceitos e aumenta a complexidade gradualmente.
 |-------|----------------|-----------------|--------|
 | [nivel-1](nivel-1/) | Fundamentos | Rotas, Path/Query Parameters, lógica Python | ✅ Completo (10 exercícios) |
 | [nivel-2](nivel-2/) | Banco de Dados | SQLAlchemy, **Pydantic**, Models, CRUD, Relacionamentos, Routers | ✅ Completo  (4/4 exercícios) ||
-| [nivel-3](nivel-3/) | Autenticação & Segurança | Hash de senhas (Argon2), JWT, OAuth2 Password Flow, OAuth2PasswordBearer, OAuth2PasswordRequestForm, Refresh Tokens, Proteção de rotas | ✅ Planejado (3 exercícios: ex-001, ex-002, ex-003) |
+| [nivel-3](nivel-3/) | Autenticação & Segurança | Hash de senhas (Argon2), JWT, OAuth2 Password Flow, OAuth2PasswordBearer, OAuth2PasswordRequestForm, Refresh Tokens, Proteção de rotas | Pendente (4/5 exercícios) |
 | [nivel-4](nivel-4/) | *A definir* | — | 🔒 Não planejado |
 | [nivel-5](nivel-5/) | *A definir* | — | 🔒 Não planejado |
 
