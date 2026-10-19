@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, Depends, status
 from sqlalchemy.orm import Session
 from models import Usuario
-from depends import get_db
+from depends import get_db, verificar_token
 from security import pwd_context
 from schemas import UsuarioResponse, UsuarioUpdate, UsuarioCreate
 
@@ -27,9 +27,8 @@ async def criar_usuario(usuario: UsuarioCreate, db: Session = Depends(get_db)):
 
 
 @user_router.delete("/{id}", status_code=status.HTTP_204_NO_CONTENT)
-async def deletar_usuario(id: int, db: Session = Depends(get_db)):
-    usuario = db.query(Usuario).filter(Usuario.id == id).first()
-    if not usuario:
+async def deletar_usuario(id: int, db: Session = Depends(get_db), usuario: Usuario = Depends(verificar_token)):
+    if usuario.id != id:
         raise HTTPException(status_code=404, detail="Usuário não encontrado")
 
     try:
@@ -41,10 +40,8 @@ async def deletar_usuario(id: int, db: Session = Depends(get_db)):
 
 
 @user_router.put("/{id}", response_model=UsuarioResponse)
-async def atualizar_usuario(id: int, dados: UsuarioUpdate, db: Session = Depends(get_db)):
-    usuario = db.query(Usuario).filter(Usuario.id == id).first()
-
-    if not usuario:
+async def atualizar_usuario(id: int, dados: UsuarioUpdate, db: Session = Depends(get_db), usuario: Usuario = Depends(verificar_token)):
+    if usuario.id != id:
         raise HTTPException(status_code=404, detail="Usuário não encontrado")
 
     if dados.nome is not None:
@@ -69,14 +66,13 @@ async def atualizar_usuario(id: int, dados: UsuarioUpdate, db: Session = Depends
 
 
 @user_router.get("/{id}", response_model=UsuarioResponse)
-async def obter_usuario(id: int, db: Session = Depends(get_db)):
-    usuario = db.query(Usuario).filter(Usuario.id == id).first()
-    if not usuario:
+async def obter_usuario(id: int, db: Session = Depends(get_db), usuario: Usuario = Depends(verificar_token)):
+    if usuario.id != id:
         raise HTTPException(status_code=404, detail="Usuário não encontrado")
     return usuario
 
 
 @user_router.get("/", response_model=list[UsuarioResponse])
-async def listar_usuarios(db: Session = Depends(get_db)):
+async def listar_usuarios(db: Session = Depends(get_db), usuario: Usuario = Depends(verificar_token)):
     usuarios = db.query(Usuario).all()
     return usuarios

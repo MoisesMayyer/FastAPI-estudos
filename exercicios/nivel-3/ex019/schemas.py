@@ -47,3 +47,34 @@ class UsuarioResponse(BaseModel):
 class Token(BaseModel):
     access_token: str
     token_type: str = "bearer"
+
+
+class ProjetoBase(BaseModel):
+    nome: str = Field(..., min_length=3, description="Nome do projeto")
+    descricao: str = Field(..., min_length=3, description="descrição do projeto")
+
+
+class ProjetoCreate(ProjetoBase):
+
+    @field_validator("nome")
+    @classmethod
+    def validar_nome(cls, valor: str) -> str:
+        if not valor.strip():
+            raise ValueError("A nome não pode conter apenas espaços")
+
+        return valor
+
+
+class ProjetoUpdate(BaseModel):
+    nome: Optional[str] = Field(None, min_length=3, description="Nome do projeto")
+    descricao: Optional[str] = Field(None, min_length=3, description="descrição do projeto")
+
+
+class ProjetoResponse(ProjetoBase):
+    id: int
+    nome: str
+    descricao: str
+    usuario_id: int
+
+    class Config:
+        from_attributes = True
