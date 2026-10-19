@@ -38,6 +38,6 @@ class Tarefa(Base):
     titulo = Column("Titulo",String, index=True)
     descricao = Column("Descricao", String)
     concluida = Column("Concluida",Boolean, default=False, nullable=False)
-    projeto_id = Column("Projeto",Integer, ForeignKey('projetos.id'))
+    projeto_id = Column("Projeto",Integer, ForeignKey('projetos.id'), nullable=False)
 
     projeto = relationship("Projeto", back_populates="tarefas")

@@ -69,12 +69,61 @@ class ProjetoUpdate(BaseModel):
     nome: Optional[str] = Field(None, min_length=3, description="Nome do projeto")
     descricao: Optional[str] = Field(None, min_length=3, description="descrição do projeto")
 
+    @field_validator("nome")
+    @classmethod
+    def validar_nome(cls, valor):
+        if valor is not None and not valor.strip():
+            raise ValueError("A nome não pode conter apenas espaços")
+
+        return valor
+
 
 class ProjetoResponse(ProjetoBase):
     id: int
     nome: str
     descricao: str
     usuario_id: int
+
+    class Config:
+        from_attributes = True
+
+
+class TarefaBase(BaseModel):
+    titulo: str = Field(..., min_length=3, description="Título da tarefa")
+    descricao: str = Field(..., min_length=3, description="descrição da tarefa")
+
+
+class TarefaCreate(TarefaBase):
+
+    @field_validator("titulo")
+    @classmethod
+    def validar_titulo(cls, valor: str) -> str:
+        if not valor.strip():
+            raise ValueError("O título não pode conter apenas espaços")
+
+        return valor
+
+
+class TarefaUpdate(BaseModel):
+    titulo: Optional[str] = Field(None, min_length=3, description="Título da tarefa")
+    descricao: Optional[str] = Field(None, min_length=3, description="descrição da tarefa")
+    concluida: Optional[bool] = Field(None, description="Status concluída/pendente da tarefa")
+
+    @field_validator("titulo")
+    @classmethod
+    def validar_titulo(cls, valor):
+        if valor is not None and not valor.strip():
+            raise ValueError("O título não pode conter apenas espaços")
+
+        return valor
+
+
+class TarefaResponse(TarefaBase):
+    id: int
+    titulo: str
+    descricao: str
+    concluida: bool
+    projeto_id: int
 
     class Config:
         from_attributes = True
