@@ -5,9 +5,8 @@
 # Projeto a ignorar completamente
 projetos/projeto-1/
 
-# Exercícios níveis 3, 4, 5 (apenas README - ignorar pastas completas)
+# Exercícios níveis  5 (apenas README - ignorar pastas completas)
 exercicios/nivel-4/
-exercicios/nivel-5/
 
 # Python - Cache e arquivos compilados
 __pycache__/

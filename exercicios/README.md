@@ -94,7 +94,7 @@ Cada exercício possui seu próprio README com o enunciado e os requisitos.
 
 Projetos voltados à autenticação de usuários, armazenamento seguro de senhas, JWT, OAuth2 e proteção de endpoints. O objetivo é aprender a controlar quem pode acessar cada recurso da API.
 
-**`nivel-4/` e `nivel-5/` — Próximas etapas**
+**`nivel-4/` e `nivel-5` — Próximas etapas**
 
 Ainda não possuem exercícios definidos. Serão preenchidos conforme eu avançar e identificar os próximos conceitos que preciso estudar.
 
