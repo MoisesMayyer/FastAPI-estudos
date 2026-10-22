@@ -1,124 +1,163 @@
 # Exercícios FastAPI
 
-Exercícios práticos organizados em **níveis progressivos**, do básico ao avançado.  
-Cada nível introduz novos conceitos e aumenta a complexidade gradualmente.
+Exercícios práticos de **FastAPI** organizados em níveis progressivos, do básico ao avançado. Cada nível apresenta novos conceitos e aumenta a complexidade aos poucos.
 
----
+![Python](https://img.shields.io/badge/Python-3.14-3776AB?logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.142-009688?logo=fastapi&logoColor=white)
+![Pytest](https://img.shields.io/badge/Pytest-testes-0A9EDC?logo=pytest&logoColor=white)
+![Níveis](https://img.shields.io/badge/n%C3%ADveis-1%20a%204-blue)
 
-## Visão Geral dos Níveis
+> **Projeto de estudo.** Cada exercício possui seu próprio enunciado em `README.md` e, quando concluído, a implementação da solução.
 
-| Nível | Foco Principal | Conceitos-Chave | Status |
-|-------|----------------|-----------------|--------|
-| [nivel-1](nivel-1/) | Fundamentos | Rotas, Path/Query Parameters, lógica Python | ✅ Completo (10 exercícios) |
-| [nivel-2](nivel-2/) | Banco de Dados | SQLAlchemy, **Pydantic**, Models, CRUD, Relacionamentos, Routers | ✅ Completo  (4/4 exercícios) |
-| [nivel-3](nivel-3/) | Autenticação & Segurança | Hash de senhas (Argon2), JWT, OAuth2 Password Flow, OAuth2PasswordBearer, OAuth2PasswordRequestForm, Refresh Tokens, Proteção de rotas | Pendente (4/5 exercícios) |
-| [nivel-4](nivel-4/) | Testes Automatizados | Pytest, TestClient, fixtures, isolamento de banco, `dependency_overrides` | 🟡 Em andamento (4/5 exercícios) |
-| [nivel-5](nivel-5/) | *A definir* | — | 🔒 Não planejado |
+## Sumário
 
----
+- [Visão geral](#visão-geral)
+- [Como executar](#como-executar)
+- [Estrutura de pastas](#estrutura-de-pastas)
+- [O que você encontra em cada nível](#o-que-você-encontra-em-cada-nível)
+- [Glossário rápido](#glossário-rápido)
+- [Como utilizar os exercícios](#como-utilizar-os-exercícios)
+- [Sobre o projeto](#sobre-o-projeto)
 
-## Como Executar
+## Visão geral
+
+| Nível | Tema | O que você pratica | Situação |
+|-------|------|--------------------|----------|
+| [nivel-1](nivel-1/) | Fundamentos | Rotas, parâmetros de caminho e de consulta, métodos HTTP, respostas JSON | ✅ Completo (10 exercícios) |
+| [nivel-2](nivel-2/) | Banco de dados | SQLAlchemy, Pydantic, CRUD, relacionamentos, routers | ✅ Completo (4/4 exercícios) |
+| [nivel-3](nivel-3/) | Autenticação e segurança | Hash de senhas (Argon2), JWT, OAuth2, refresh tokens, RBAC | 🟡 Em andamento (4/5 exercícios) |
+| [nivel-4](nivel-4/) | Testes automatizados | Pytest, `TestClient`, fixtures, isolamento de banco | 🟡 Em andamento (4/5 exercícios) |
+| [nivel-5](nivel-5/) | A definir | — | 🔒 Não planejado |
+
+**Legenda:** ✅ Completo · 🟡 Em andamento · 🔒 Não planejado
+
+## Como executar
+
+**Pré-requisitos:** Python 3.14 ou superior e as dependências do projeto instaladas.
 
 ```bash
-# Na raiz do projeto
+# 1. Na raiz do repositório, ative o ambiente virtual
 source .venv/bin/activate
 
-# Nível 1 - arquivo único
-uvicorn exercicios.nivel-1.ex001:app --reload
+# 2. Execute o exercício a partir da pasta dele
+cd exercicios/nivel-1
+uvicorn ex001:app --reload
 
-# Nível 2 - estrutura modular
-uvicorn exercicios.nivel-2.ex001.main:app --reload
-uvicorn exercicios.nivel-2.ex002.main:app --reload
+cd exercicios/nivel-2/ex012
+uvicorn main:app --reload
 
-# Nível 4 - testes automatizados
-pytest exercicios/nivel-4/ex021
+# 3. Nos exercícios com testes (nível 4)
+cd exercicios/nivel-4/ex021
+pytest
 ```
 
-Acesse a documentação automática em: **http://localhost:8000/docs**
+Depois de iniciar a API, a documentação interativa fica disponível em **http://localhost:8000/docs**.
 
----
+## Estrutura de pastas
 
----
-
-## Níveis de Estudo
-
-Os exercícios estão organizados por níveis de dificuldade e acompanham minha evolução no aprendizado de FastAPI.
-
-- **Nível 1 — Fundamentos:** criação de endpoints, parâmetros, métodos HTTP, respostas JSON e operações básicas com FastAPI.
-- **Nível 2 — Banco de Dados:** desenvolvimento de APIs com SQLAlchemy, persistência de dados, relacionamentos entre tabelas, Pydantic e organização do código em módulos.
-- **Nível 3 — Autenticação e Segurança:** cadastro de usuários, hash de senhas, autenticação com JWT, OAuth2 e proteção de rotas.
-- **Nível 4 — Testes Automatizados:** escrita de testes com Pytest, uso do `TestClient`, fixtures, isolamento do banco de dados e testes de integração com FastAPI e SQLAlchemy.
-- **Nível 5 — A definir:** reservado para conceitos mais avançados que serão definidos futuramente.
-
-Cada nível introduz novos conceitos e aumenta gradualmente a complexidade dos projetos.
-
-## Estrutura de Pastas
-
-A pasta `exercicios/` contém os projetos desenvolvidos durante os estudos, separados por nível.
+A pasta `exercicios/` reúne os exercícios separados por nível. Cada exercício tem seu próprio diretório e o enunciado no `README.md`.
 
 ```text
 exercicios/
+├── README.md
 ├── nivel-1/
 │   ├── ex001.py ... ex010.py
 │   └── README.md
-│
 ├── nivel-2/
-│   ├── ex001/
-│   ├── ex002/
-│   ├── ex003/
-│   ├── ex004/
-│   ├── ...
-│   ├── sqlalchemy-exercicios/
-│   └── README.md
-│
+│   ├── ex011/
+│   ├── ex012/
+│   ├── ex013/
+│   ├── ex014/
+│   └── ex015/
 ├── nivel-3/
-│   ├── ex-001/
-│   ├── ex-002/
-│   ├── ex-003/
-│   └── README.md
-│
+│   ├── ex016/
+│   ├── ex017/
+│   ├── ex018/
+│   ├── ex019/
+│   └── ex020/
 ├── nivel-4/
 │   ├── ex021/
 │   ├── ex022/
 │   ├── ex023/
 │   └── ex024/
-│
 └── nivel-5/
 ```
 
-### O que você encontra em cada nível?
+## O que você encontra em cada nível
 
-**`nivel-1/` — Exercícios introdutórios**
+### Nível 1 — Fundamentos
 
-Exercícios menores, com arquivos Python individuais, para praticar os fundamentos do FastAPI e entender como criar e testar endpoints.
+O ponto de partida. São exercícios menores, em arquivos únicos, para entender como uma API recebe requisições e devolve respostas.
 
-**`nivel-2/` — APIs com banco de dados**
+**Você pratica:**
 
-Projetos com estrutura modular, separando responsabilidades entre arquivos. Aqui pratico CRUD, SQLAlchemy, modelos, sessões de banco de dados, relacionamentos e validação de dados.
+- criação de endpoints;
+- parâmetros de caminho e de consulta;
+- métodos HTTP;
+- respostas em JSON;
+- validação e teste dos endpoints pelo `/docs`.
 
-Cada exercício possui seu próprio README com o enunciado e os requisitos.
+### Nível 2 — Banco de dados
 
-**`nivel-3/` — Autenticação e segurança**
+Aqui os dados passam a ser salvos de verdade. O código é dividido em módulos, com responsabilidades separadas entre rotas, modelos, validação e acesso ao banco.
 
-Projetos voltados à autenticação de usuários, armazenamento seguro de senhas, JWT, OAuth2 e proteção de endpoints. O objetivo é aprender a controlar quem pode acessar cada recurso da API.
+**Você pratica:**
 
-**`nivel-4/` — Testes automatizados**
+- CRUD completo;
+- models com SQLAlchemy;
+- validação com Pydantic;
+- relacionamentos entre tabelas;
+- organização de routers;
+- sessões e persistência no banco.
 
-Exercícios voltados à verificação automática das APIs com Pytest e `TestClient`. Aqui prático testes de endpoints e CRUD, fixtures para reutilização de dados, isolamento do banco de dados e testes de integração com FastAPI e SQLAlchemy.
+### Nível 3 — Autenticação e segurança
 
-**`nivel-5/` — Próximas etapas**
+Projetos voltados ao controle de quem pode acessar cada recurso da API.
+
+**Você pratica:**
+
+- cadastro de usuários e hash de senhas;
+- autenticação com JWT;
+- fluxo OAuth2 Password;
+- refresh tokens e renovação de sessão;
+- RBAC (controle de acesso por função);
+- proteção de rotas e permissões.
+
+### Nível 4 — Testes automatizados
+
+Exercícios voltados à verificação automática das APIs, sem depender de testes manuais no `/docs`.
+
+**Você pratica:**
+
+- testes com Pytest;
+- requisições com `TestClient`;
+- fixtures para reutilizar dados e configurações;
+- testes de CRUD e de respostas HTTP;
+- isolamento do banco de dados nos testes;
+- testes de integração com FastAPI e SQLAlchemy.
+
+### Nível 5 — Próximas etapas
 
 Ainda não possui exercícios definidos. Será preenchido conforme eu avançar e identificar os próximos conceitos que preciso estudar.
 
-## Como Utilizar os Exercícios
+## Glossário rápido
 
-1. Leia o README do exercício para entender o problema e os requisitos.
+- **API:** conjunto de rotas que permite a comunicação entre sistemas.
+- **Endpoint:** cada endereço da API, como `GET /tarefas`.
+- **CRUD:** as quatro operações básicas sobre dados — criar, consultar, atualizar e excluir.
+- **JWT:** token assinado usado para identificar e autenticar o usuário.
+- **Fixture:** dado ou configuração preparada para ser reutilizada em vários testes.
+- **Pytest:** ferramenta que executa os testes automatizados.
+
+## Como utilizar os exercícios
+
+1. Leia o `README.md` do exercício para entender o problema e os requisitos.
 2. Implemente a solução por conta própria, consultando a documentação quando necessário.
-3. Utilize o `/docs` do FastAPI para testar os endpoints.
-4. Revise os erros encontrados e melhore a implementação conforme aprende novos conceitos.
+3. Use o `/docs` do FastAPI para testar os endpoints.
+4. Revise os erros encontrados e melhore a implementação conforme aprender novos conceitos.
 5. Consulte o histórico de commits para acompanhar a evolução do código.
 
-## Sobre o Projeto
+## Sobre o projeto
 
 Este repositório documenta minha evolução prática no aprendizado de Python e FastAPI. Os exercícios partem de problemas simples e evoluem gradualmente para APIs mais completas.
 
