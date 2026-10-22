@@ -10,9 +10,9 @@ Cada nível introduz novos conceitos e aumenta a complexidade gradualmente.
 | Nível | Foco Principal | Conceitos-Chave | Status |
 |-------|----------------|-----------------|--------|
 | [nivel-1](nivel-1/) | Fundamentos | Rotas, Path/Query Parameters, lógica Python | ✅ Completo (10 exercícios) |
-| [nivel-2](nivel-2/) | Banco de Dados | SQLAlchemy, **Pydantic**, Models, CRUD, Relacionamentos, Routers | ✅ Completo  (4/4 exercícios) ||
+| [nivel-2](nivel-2/) | Banco de Dados | SQLAlchemy, **Pydantic**, Models, CRUD, Relacionamentos, Routers | ✅ Completo  (4/4 exercícios) |
 | [nivel-3](nivel-3/) | Autenticação & Segurança | Hash de senhas (Argon2), JWT, OAuth2 Password Flow, OAuth2PasswordBearer, OAuth2PasswordRequestForm, Refresh Tokens, Proteção de rotas | Pendente (4/5 exercícios) |
-| [nivel-4](nivel-4/) | *A definir* | — | 🔒 Não planejado |
+| [nivel-4](nivel-4/) | Testes Automatizados | Pytest, TestClient, fixtures, isolamento de banco, `dependency_overrides` | 🟡 Em andamento (4/5 exercícios) |
 | [nivel-5](nivel-5/) | *A definir* | — | 🔒 Não planejado |
 
 ---
@@ -29,6 +29,9 @@ uvicorn exercicios.nivel-1.ex001:app --reload
 # Nível 2 - estrutura modular
 uvicorn exercicios.nivel-2.ex001.main:app --reload
 uvicorn exercicios.nivel-2.ex002.main:app --reload
+
+# Nível 4 - testes automatizados
+pytest exercicios/nivel-4/ex021
 ```
 
 Acesse a documentação automática em: **http://localhost:8000/docs**
@@ -44,7 +47,7 @@ Os exercícios estão organizados por níveis de dificuldade e acompanham minha 
 - **Nível 1 — Fundamentos:** criação de endpoints, parâmetros, métodos HTTP, respostas JSON e operações básicas com FastAPI.
 - **Nível 2 — Banco de Dados:** desenvolvimento de APIs com SQLAlchemy, persistência de dados, relacionamentos entre tabelas, Pydantic e organização do código em módulos.
 - **Nível 3 — Autenticação e Segurança:** cadastro de usuários, hash de senhas, autenticação com JWT, OAuth2 e proteção de rotas.
-- **Nível 4 — A definir:** novos exercícios serão planejados conforme meu avanço nos estudos.
+- **Nível 4 — Testes Automatizados:** escrita de testes com Pytest, uso do `TestClient`, fixtures, isolamento do banco de dados e testes de integração com FastAPI e SQLAlchemy.
 - **Nível 5 — A definir:** reservado para conceitos mais avançados que serão definidos futuramente.
 
 Cada nível introduz novos conceitos e aumenta gradualmente a complexidade dos projetos.
@@ -75,6 +78,11 @@ exercicios/
 │   └── README.md
 │
 ├── nivel-4/
+│   ├── ex021/
+│   ├── ex022/
+│   ├── ex023/
+│   └── ex024/
+│
 └── nivel-5/
 ```
 
@@ -94,9 +102,13 @@ Cada exercício possui seu próprio README com o enunciado e os requisitos.
 
 Projetos voltados à autenticação de usuários, armazenamento seguro de senhas, JWT, OAuth2 e proteção de endpoints. O objetivo é aprender a controlar quem pode acessar cada recurso da API.
 
-**`nivel-4/` e `nivel-5` — Próximas etapas**
+**`nivel-4/` — Testes automatizados**
 
-Ainda não possuem exercícios definidos. Serão preenchidos conforme eu avançar e identificar os próximos conceitos que preciso estudar.
+Exercícios voltados à verificação automática das APIs com Pytest e `TestClient`. Aqui prático testes de endpoints e CRUD, fixtures para reutilização de dados, isolamento do banco de dados e testes de integração com FastAPI e SQLAlchemy.
+
+**`nivel-5/` — Próximas etapas**
+
+Ainda não possui exercícios definidos. Será preenchido conforme eu avançar e identificar os próximos conceitos que preciso estudar.
 
 ## Como Utilizar os Exercícios
 

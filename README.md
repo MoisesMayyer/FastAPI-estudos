@@ -9,7 +9,7 @@ O projeto é dividido em níveis, cada um introduzindo novos conceitos e aprofun
 - **Nível 1 — Fundamentos**: rotas, parâmetros, métodos HTTP e validações básicas.
 - **Nível 2 — Pydantic e banco de dados**: validação e estruturação de dados com Pydantic, persistência com SQLite, SQLAlchemy e migrações.
 - **Nível 3 — Autenticação e segurança**: OAuth2, JWT e autenticação de usuários. (Em desenvolvimento)
-- **Nível 4 — Em planejamento**
+- **Nível 4 — Testes automatizados**: Pytest, `TestClient`, fixtures, isolamento de banco e testes de integração com FastAPI e SQLAlchemy. (Em desenvolvimento)
 - **Nível 5 — Em planejamento**
 
 A pasta `projetos/` contém aplicações mais completas, desenvolvidas para aplicar os conceitos estudados na prática.
@@ -19,6 +19,7 @@ A pasta `projetos/` contém aplicações mais completas, desenvolvidas para apli
 - Python
 - FastAPI
 - Pydantic
+- Pytest
 - SQLAlchemy
 - SQLite
 - Uvicorn
