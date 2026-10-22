@@ -1,8 +1,23 @@
 # FastAPI Estudos
 
-Repositório dedicado ao meu aprendizado prático de FastAPI, com exercícios progressivos para desenvolver minhas habilidades em construção de APIs REST, integração com banco de dados e autenticação.
+Repositório de estudos práticos de **FastAPI**, organizado em níveis progressivos: dos fundamentos de rotas e parâmetros até autenticação, segurança e testes automatizados.
 
-O projeto é dividido em níveis, cada um introduzindo novos conceitos e aprofundando os conhecimentos adquiridos anteriormente.
+![Python](https://img.shields.io/badge/Python-3.14-3776AB?logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.142-009688?logo=fastapi&logoColor=white)
+![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-2.1-D71F00)
+![Pydantic](https://img.shields.io/badge/Pydantic-2.13-E92063)
+![Pytest](https://img.shields.io/badge/Pytest-testes-0A9EDC?logo=pytest&logoColor=white)
+![Status](https://img.shields.io/badge/exerc%C3%ADcios-em%20andamento-yellow)
+
+> **Projeto de estudo.** Este repositório documenta minha evolução prática em Python e FastAPI, com exercícios organizados em níveis progressivos e implementação própria.
+
+## Sumário
+
+- [Estrutura do projeto](#estrutura-do-projeto)
+- [Tecnologias e ferramentas](#tecnologias-e-ferramentas)
+- [Metodologia](#metodologia)
+- [Como executar](#como-executar)
+- [Objetivo](#objetivo)
 
 ## Estrutura do projeto
 
@@ -11,8 +26,6 @@ O projeto é dividido em níveis, cada um introduzindo novos conceitos e aprofun
 - **Nível 3 — Autenticação e segurança**: OAuth2, JWT e autenticação de usuários. (Em desenvolvimento)
 - **Nível 4 — Testes automatizados**: Pytest, `TestClient`, fixtures, isolamento de banco e testes de integração com FastAPI e SQLAlchemy. (Em desenvolvimento)
 - **Nível 5 — Em planejamento**
-
-A pasta `projetos/` contém aplicações mais completas, desenvolvidas para aplicar os conceitos estudados na prática.
 
 ## Tecnologias e ferramentas
 
