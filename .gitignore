@@ -40,3 +40,4 @@ Thumbs.db
 .env.local
 .env.*.local
 /uv.lock
+/exercicios/nivel-4/ex022/produtos.json
