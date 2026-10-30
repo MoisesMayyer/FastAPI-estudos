@@ -27,7 +27,7 @@ async def pegar_cliente(id: int, db: Session = Depends(get_db)):
     return cliente
 
 
-@rota_clientes.post("/", response_model=ClienteResponse)
+@rota_clientes.post("/", response_model=ClienteResponse, status_code=201)
 async def criar_cliente(dados: ClientCreate, db: Session = Depends(get_db)):
     cliente_existe = db.query(Cliente).filter(Cliente.email == dados.email).first()
 
