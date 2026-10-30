@@ -47,9 +47,13 @@ async def criar_cliente(dados: ClientCreate, db: Session = Depends(get_db)):
 
 
 
-@rota_clientes.put("/{id}")
-async def editar_cliente(id: int, dados: ClienteUpdate, db: Session = Depends(get_db)):
 
+@rota_clientes.put("/{id}")
+async def editar_cliente(
+    id: int,
+    dados: ClienteUpdate,
+    db: Session = Depends(get_db)
+):
     cliente = db.query(Cliente).filter(Cliente.id == id).first()
 
     if not cliente:
@@ -63,6 +67,19 @@ async def editar_cliente(id: int, dados: ClienteUpdate, db: Session = Depends(ge
             Cliente.email == dados.email,
             Cliente.id != id
         ).first()
+
+        if email_existe:
+            raise HTTPException(status_code=409, detail="Email já cadastrado")
+
+        cliente.email = dados.email
+
+    if dados.telefone is not None:
+        cliente.telefone = dados.telefone
+
+    db.commit()
+    db.refresh(cliente)
+
+    return cliente
 
 
 @rota_clientes.delete("/{id}")
