@@ -1,8 +1,8 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, status, Response
 from sqlalchemy.orm import Session
 
 
-from schemas import ClientCreate, ClienteResponse, ClienteUpdate
+from schemas import ClienteCreate, ClienteResponse, ClienteUpdate
 
 from database.depends import get_db
 from database.model import Cliente
@@ -10,7 +10,7 @@ from database.model import Cliente
 rota_clientes = APIRouter(prefix="/clientes", tags=["clientes"])
 
 
-@rota_clientes.get("/", response_model=list[ClienteResponse])
+@rota_clientes.get("", response_model=list[ClienteResponse])
 async def pegar_clientes(db: Session = Depends(get_db)):
     clientes = db.query(Cliente).all()
 
@@ -27,8 +27,8 @@ async def pegar_cliente(id: int, db: Session = Depends(get_db)):
     return cliente
 
 
-@rota_clientes.post("/", response_model=ClienteResponse, status_code=201)
-async def criar_cliente(dados: ClientCreate, db: Session = Depends(get_db)):
+@rota_clientes.post("", response_model=ClienteResponse, status_code=201)
+async def criar_cliente(dados: ClienteCreate, db: Session = Depends(get_db)):
     cliente_existe = db.query(Cliente).filter(Cliente.email == dados.email).first()
 
     if cliente_existe:
@@ -46,9 +46,7 @@ async def criar_cliente(dados: ClientCreate, db: Session = Depends(get_db)):
     return novo_cliente
 
 
-
-
-@rota_clientes.put("/{id}")
+@rota_clientes.put("/{id}", response_model=ClienteResponse)
 async def editar_cliente(
     id: int,
     dados: ClienteUpdate,
@@ -57,7 +55,7 @@ async def editar_cliente(
     cliente = db.query(Cliente).filter(Cliente.id == id).first()
 
     if not cliente:
-        raise HTTPException(status_code=404, detail="Cliente não encontrado")
+        raise HTTPException(status_code=404, detail="cliente nao encontrado")
 
     if dados.nome is not None:
         cliente.nome = dados.nome
@@ -69,7 +67,7 @@ async def editar_cliente(
         ).first()
 
         if email_existe:
-            raise HTTPException(status_code=409, detail="Email já cadastrado")
+            raise HTTPException(status_code=400, detail="cliente ja cadastrado")
 
         cliente.email = dados.email
 
@@ -92,4 +90,4 @@ async def deletar_cliente(id: int, db: Session = Depends(get_db)):
     db.delete(cliente)
     db.commit()
 
-    return None
+    return Response(status_code=status.HTTP_204_NO_CONTENT)
