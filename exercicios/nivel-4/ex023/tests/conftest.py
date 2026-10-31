@@ -6,7 +6,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import pytest
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import Session
 from fastapi.testclient import TestClient
 
 from config import TEST_URL_DATABASE
@@ -16,18 +16,27 @@ from main import app
 
 
 engine_test = create_engine(TEST_URL_DATABASE, pool_pre_ping=True)
-TestingSessionLocal = sessionmaker(bind=engine_test, autocommit=False, autoflush=False)
+
+
+@pytest.fixture(scope="session", autouse=True)
+def schema_teste():
+    Base.metadata.drop_all(bind=engine_test)
+    Base.metadata.create_all(bind=engine_test)
+    yield
+    Base.metadata.drop_all(bind=engine_test)
 
 
 @pytest.fixture(scope="function")
 def db_session():
-    Base.metadata.create_all(bind=engine_test)
-    session = TestingSessionLocal()
+    conexao = engine_test.connect()
+    transacao = conexao.begin()
+    session = Session(bind=conexao, join_transaction_mode="create_savepoint")
     try:
         yield session
     finally:
-        session.rollback()
         session.close()
+        transacao.rollback()
+        conexao.close()
 
 
 @pytest.fixture(scope="function")
@@ -45,9 +54,3 @@ def client(db_session):
         yield test_client
     finally:
         app.dependency_overrides.clear()
-
-
-@pytest.fixture(scope="session", autouse=True)
-def cleanup_database():
-    yield
-    Base.metadata.drop_all(bind=engine_test)
