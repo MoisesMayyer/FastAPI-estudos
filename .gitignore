@@ -1,0 +1,89 @@
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+wheels/
+.eggs/
+*.egg-info/
+pip-wheel-metadata/
+.installed.cfg
+*.egg
+MANIFEST
+
+# --- Ambientes virtuais ---
+.venv/
+venv/
+env/
+ENV/
+.venv*/
+virtualenv/
+
+# --- Variáveis de ambiente e segredos ---
+.env
+.env.*
+!.env.example
+!.env.sample
+*.pem
+*.key
+
+# --- Banco de dados local ---
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+*.db-wal
+*.db-shm
+
+# --- Testes e cobertura ---
+.pytest_cache/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+.tox/
+.nox/
+
+# --- Ferramentas de análise / cache ---
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.ruff_cache/
+.pyre/
+.pytype/
+
+# --- Jupyter ---
+.ipynb_checkpoints/
+
+# --- IDEs e editores ---
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+*.swp
+*.swo
+*~
+.\#*
+\#*\#
+
+# --- Sistema operacional ---
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# --- Logs e temporários ---
+*.log
+logs/
+*.tmp
+*.bak
+*.orig
